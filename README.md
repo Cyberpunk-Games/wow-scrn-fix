@@ -17,8 +17,8 @@ For every screenshot in the source folder it writes a copy to a separate output 
   `eXIf` chunk.
 - **Windows file dates**: created, modified and accessed. These help Explorer, but any
   later copy or download resets them.
-- **A correct extension**: files whose content doesn't match their extension (JPEG data
-  named `.png`) are renamed to `.jpg`.
+- **A consistent extension** that follows the content: all JPEGs become `.jpg` (including
+  `.jpeg` files and JPEG data named `.png`), PNGs stay `.png`.
 
 Safety:
 

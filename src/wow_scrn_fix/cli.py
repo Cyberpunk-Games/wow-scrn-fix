@@ -12,7 +12,7 @@ from pathlib import Path
 
 from . import metadata
 from .filetimes import set_file_times
-from .naming import CANONICAL_EXT, VALID_EXTS, detect_kind, parse_filename_date
+from .naming import CANONICAL_EXT, detect_kind, parse_filename_date
 
 VIDEO_EXTS = {".mp4", ".mov", ".avi", ".mkv", ".webm"}
 
@@ -38,16 +38,15 @@ def plan(src_dir, out_dir):
         if src.suffix.lower() in VIDEO_EXTS or item.kind == "mp4":
             item.skip = "video, left alone"
             continue
-        if item.kind not in VALID_EXTS:
+        if item.kind not in CANONICAL_EXT:
             item.skip = "not a JPEG or PNG"
             continue
         item.when = parse_filename_date(src.name)
         if item.when is None:
             item.skip = "no date in filename"
             continue
-        # Fix extensions that lie about the content, e.g. JPEG data saved as .png.
-        suffix = src.suffix if src.suffix.lower() in VALID_EXTS[item.kind] else CANONICAL_EXT[item.kind]
-        item.dest = out_dir / (src.stem + suffix)
+        # Extension follows the content: .jpeg and JPEG data saved as .png both become .jpg.
+        item.dest = out_dir / (src.stem + CANONICAL_EXT[item.kind])
         key = item.dest.name.lower()
         if key in taken:
             item.error = f"output name {item.dest.name} also used by {taken[key]}"

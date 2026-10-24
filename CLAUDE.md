@@ -39,7 +39,8 @@ py -m venv .venv && .venv\Scripts\python -m pip install -e .[dev]   # setup
 
 - 2,390 files: 2,179 `.jpg`, 32 `.jpeg`, 169 `.png`, 10 `.mp4`. All JPEGs have EXIF
   `Software=Picasa` and no dates.
-- 95 `.png` files are really JPEG data (all 2026); their copies get renamed to `.jpg`.
+- 95 `.png` files are really JPEG data (all 2026). Output extension follows content:
+  every JPEG (incl. `.jpeg` and these) becomes `.jpg`.
 - `WoWScrnShot_MMDDYY_HHMMSS` uses a two-digit year (2005 to 2026 present).
 - `wowremix-xpto70.mp4` has no date anywhere.
 

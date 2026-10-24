@@ -11,8 +11,7 @@ _PATTERNS = (
     re.compile(r"WoW (?P<y>\d{4})-(?P<mo>\d\d)-(?P<d>\d\d) (?P<h>\d\d)-(?P<mi>\d\d)-(?P<s>\d\d)(?:-\d\d)?"),
 )
 
-# Extensions accepted as-is for each real file type, and the one used when renaming.
-VALID_EXTS = {"jpeg": {".jpg", ".jpeg"}, "png": {".png"}}
+# Output extension for each real file type (.jpeg and fake .png JPEGs all become .jpg).
 CANONICAL_EXT = {"jpeg": ".jpg", "png": ".png"}
 
 

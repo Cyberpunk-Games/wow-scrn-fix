@@ -37,7 +37,7 @@ def test_apply_writes_dated_copies_and_leaves_source_alone(src, tmp_path):
     out = tmp_path / "WoW_fixed"
     assert sorted(p.name for p in out.iterdir()) == [
         "WoW 2010-01-05 20-09-56-05.png",
-        "WoWScrnShot_010118_012245.jpeg",
+        "WoWScrnShot_010118_012245.jpg",  # .jpeg normalised to .jpg
         "WoWScrnShot_042826_220257.jpg",  # extension fixed to match content
         "WoWScrnShot_052705_024957.jpg",
     ]
@@ -53,6 +53,12 @@ def test_rerun_skips_files_already_in_output(src, tmp_path, capsys):
     capsys.readouterr()
     assert main([str(src), "--apply"]) == 0
     assert "already in output  4" in capsys.readouterr().out
+
+
+def test_jpg_and_jpeg_with_same_stem_is_an_error(src, jpeg_bytes, capsys):
+    (src / "WoWScrnShot_010118_012245.jpg").write_bytes(jpeg_bytes)
+    assert main([str(src)]) == 1
+    assert "also used by" in capsys.readouterr().out
 
 
 def test_refuses_to_write_into_source(src):

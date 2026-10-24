@@ -1,0 +1,26 @@
+# Screenshot data: originals and fixed copies stay out of git
+/WoW/
+/WoW_fixed/
+*_fixed/
+*.jpg
+*.jpeg
+*.png
+*.mp4
+*.part
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
